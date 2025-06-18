@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question Answer Box</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    #answer {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Ask a Question</h2>
+  <input type="text" id="question" placeholder="Type your question here...">
+  <button onclick="getAnswer()">Enter</button>
+
+  <div id="answer"></div>
+
+  <script>
+    function getAnswer() {
+      const question = document.getElementById("question").value;
+      const answerDiv = document.getElementById("answer");
+
+      if (!question.trim()) {
+        answerDiv.textContent = "Please enter a question.";
+        return;
+      }
+
+      // Simulate an answer (you can replace this with a real API call)
+      const simulatedAnswer = "You asked: \"" + question + "\" — This is a placeholder answer.";
+
+      answerDiv.textContent = simulatedAnswer;
+    }
+  </script>
+
+</body>
+</html>
