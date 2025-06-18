@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Question Answer Box</title>
+  <title>Ask a Question</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,12 +30,12 @@
 
   <h2>Ask a Question</h2>
   <input type="text" id="question" placeholder="Type your question here...">
-  <button onclick="getAnswer()">Enter</button>
+  <button onclick="askQuestion()">Enter</button>
 
   <div id="answer"></div>
 
   <script>
-    function getAnswer() {
+    async function askQuestion() {
       const question = document.getElementById("question").value;
       const answerDiv = document.getElementById("answer");
 
@@ -44,10 +44,21 @@
         return;
       }
 
-      // Simulate an answer (you can replace this with a real API call)
-      const simulatedAnswer = "You asked: \"" + question + "\" — This is a placeholder answer.";
+      try {
+        const response = await fetch("http://0.0.0.0:10000/query", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ question })
+        });
 
-      answerDiv.textContent = simulatedAnswer;
+        const data = await response.json();
+        answerDiv.textContent = data.answer;
+      } catch (error) {
+        answerDiv.textContent = "Error contacting server.";
+        console.error(error);
+      }
     }
   </script>
 
